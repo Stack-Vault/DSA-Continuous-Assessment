@@ -48,7 +48,24 @@ void insert_node_beginning(Node*& head, int value){
 	newNode->next = head;
 	head = newNode;
 }
-
+void insert_node_end(Node*& head, int value){
+	Node* newNode = new Node();
+	newNode->data = value;
+	newNode->next = NULL;
+	
+	if (head == NULL){
+		head = newNode;
+		return; // used to end programm running 
+	}
+	
+	//traverse throuht the list
+	Node* temp = head;
+	while(temp->next != NULL){
+		temp = temp->next;
+	}
+		
+	temp->next = newNode;
+}
 
 int main(){
     Node* head = NULL;
@@ -64,6 +81,7 @@ int main(){
     head = &n1;
     
     insert_node_beginning(head, 5);
+    insert_node_end(head, 40);
     print_list(head);
     int total = count_nodes(head);
     cout << "The count is "<< total << endl;
