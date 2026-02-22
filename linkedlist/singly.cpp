@@ -84,6 +84,38 @@ void insert_node_end(Node*& head, int value) {
     temp->next = newNode;
 }
 
+
+// ---------------------------------------------
+// Insert node at any position
+// ---------------------------------------------
+
+void insert_any_position(Node*& head, int pos, int val){
+	Node* newNode = new Node();
+	newNode->data = val;
+	Node* prev = head;
+	int current_position = 1;
+	
+	if(pos == 1){
+		insert_node_beginning(head, 8);
+		return;
+	}
+	while(current_position < pos-1 && prev != NULL){
+		current_position++;
+		prev = prev->next;
+	}
+	if(prev == NULL){
+		cout << "no such position";	
+	}
+	Node* after = prev->next;
+	prev->next = newNode;
+	newNode->next = after;
+}
+
+// ---------------------------------------------
+// is found function
+// ---------------------------------------------
+
+
 // ---------------------------------------------
 // Main Function
 // ---------------------------------------------
@@ -106,6 +138,7 @@ int main() {
     // Insert operations
     insert_node_beginning(head, 5);
     insert_node_end(head, 40);
+    insert_any_position(head, 2, 100);
 
     // Print list
     print_list(head);
