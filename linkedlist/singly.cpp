@@ -96,7 +96,7 @@ void insert_any_position(Node*& head, int pos, int val){
 	int current_position = 1;
 	
 	if(pos == 1){
-		insert_node_beginning(head, 8);
+		insert_node_beginning(head, val);
 		return;
 	}
 	while(current_position < pos-1 && prev != NULL){
@@ -105,6 +105,7 @@ void insert_any_position(Node*& head, int pos, int val){
 	}
 	if(prev == NULL){
 		cout << "no such position";	
+		return;
 	}
 	Node* after = prev->next;
 	prev->next = newNode;
@@ -115,6 +116,15 @@ void insert_any_position(Node*& head, int pos, int val){
 // is found function
 // ---------------------------------------------
 
+bool is_found(Node* head, int val){
+	while(head != NULL){
+	if(head->data == val){
+		return true;
+	}
+	head = head->next;
+   }
+	return false;
+}
 
 // ---------------------------------------------
 // Main Function
@@ -122,23 +132,39 @@ void insert_any_position(Node*& head, int pos, int val){
 int main() {
     Node* head = NULL;
 
-    Node n1, n2, n3;
-
-    n1.data = 10;
-    n1.next = &n2;
-
-    n2.data = 20;
-    n2.next = &n3;
-
-    n3.data = 30;
-    n3.next = NULL;
-
-    head = &n1;
-
+//    Node n1, n2, n3;
+//
+//    n1.data = 10;
+//    n1.next = &n2;
+//
+//    n2.data = 20;
+//    n2.next = &n3;
+//
+//    n3.data = 30;
+//    n3.next = NULL;
+//
+//    head = &n1;
+    
+    int num_nodes, num_queries; 
+    cin >> num_nodes >> num_queries;
+    for(int i=0 ; i < num_nodes; i++){
+    	int val; cin >> val;
+    	insert_node_beginning(head, val);
+	}
+	
+	// search queries
+	for(int i = 0; i < num_queries ; i++){
+		int key; cin >> key;
+		if(is_found(head, key)){
+			cout << key << "found" << endl;
+		}else{
+			cout << key << "not found" << endl;
+		}
+	}
     // Insert operations
-    insert_node_beginning(head, 5);
-    insert_node_end(head, 40);
-    insert_any_position(head, 2, 100);
+//    insert_node_beginning(head, 5);
+//    insert_node_end(head, 40);
+//    insert_any_position(head, 2, 100);
 
     // Print list
     print_list(head);
